@@ -1,0 +1,45 @@
+#include <iostream>
+#include <time.h>
+#include <random>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int randomNum(){
+
+    srand(time(0));
+
+    int num = (rand()%100)+1;
+    return num;
+
+}
+
+int main() {
+    int num = randomNum();
+    int guess=0;
+    cout << "========== NUMBER GUESSING GAME ==========" << endl << endl;
+    cout << "Guess a number between 1 and 100: " << endl;
+    
+    vector<int> guessed;
+
+    do{
+        cin >> guess;
+        auto it = find(guessed.begin(), guessed.end(), guess);
+
+        if (it != guessed.end()) {
+            cout << "\n ! Number already guessed! ";
+        }else{
+            guessed.push_back(guess);
+        }
+
+        if(guess>num){
+            cout<< "\n NOPE!\n The number is LOWER than " <<guess<< ".\n\n  Guess again:\t";
+        }else if(guess < num){
+            cout<< "\n NOPE!\n The number is HIGHER than " <<guess<< ".\n\n  Guess again:\t";
+        }
+        else{
+            cout << "YES! The number is " << num << ". \n";
+        }
+    }while(guess!=num);
+    return 0;
+}
